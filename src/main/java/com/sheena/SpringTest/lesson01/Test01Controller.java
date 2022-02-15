@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/lesson01/test01")
-public class Test01 {
+public class Test01Controller {
 	
 	@RequestMapping("/1")
 	@ResponseBody
