@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sheena.SpringTest.lesson03.dao.RealEstateDAO">
+
+	<!-- SELECT 다루기 연습문제 -->
+	<!-- 1. id로 SELECT 하기 -->
+
+	<select id="selectRealEstate" resultType="com.sheena.SpringTest.lesson03.model.RealEstateModel"
+	parameterType="int">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+			`id` = #{id}
+	</select>	
+	
+	
+	<!-- 2. 월세 조건 SELECT -->
+	
+	<select id="selectRenPrice" resultType="com.sheena.SpringTest.lesson03.model.RealEstateModel"
+	parameterType="int">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+			<![CDATA[`rentPrice` < #{rent}]]>
+	</select>
+	
+	
+	<!-- 3. 복합 조건 SELECT -->
+
+	<select id="selectAreaPrice" resultType="com.sheena.SpringTest.lesson03.model.RealEstateModel"
+	parameterType="map">
+		SELECT
+			`id`
+			, `realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`real_estate`
+		WHERE
+			<![CDATA[
+			`area` >= #{area}
+			AND `price` <= #{price}
+			]]>
+	</select>	
+	
+	
+	
+	
+	
+	
+	<!-- INSERT 다루기 연습문제 -->
+	<!-- 1. 객체로 INSERT 하기 -->
+	
+	<insert id="insertRealEstate" parameterType="com.sheena.SpringTest.lesson03.model.RealEstateModel">
+		INSERT INTO `real_estate`
+		(
+			`realtorId`
+			, `address`
+			, `area`
+			, `type`
+			, `price`
+			, `rentPrice`
+			, `createdAt`
+			, `updatedAt`
+		) VALUE (
+			#{realtorId}
+			, #{address}
+			, #{area}
+			, #{type}
+			, #{price}
+			, #{rentPrice}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	
+	
+	<!-- 2. Field로 INSERT 하기 -->
+	
+	<insert id="insertRealEstateField" parameterType="map">
+		INSERT INTO `real_estate`
+			(
+				`realtorId`
+				, `address`
+				, `area`
+				, `type`
+				, `price`
+				, `rentPrice`
+				, `createdAt`
+				, `updatedAt`
+			) VALUE (
+				#{realtorId}
+				, #{address}
+				, #{area}
+				, #{type}
+				, #{price}
+				, #{rentPrice}
+				, now()
+				, now()
+			)
+	</insert>
+	
+	
+	
+	
+	<!-- UPDATE 다루기 연습문제 -->
+	
+	
+	<update id="updateRealEstateField" parameterType="com.sheena.SpringTest.lesson03.model.RealEstateModel">
+		UPDATE `real_estate`
+		SET
+			`type` = #{type}
+			, `price` = #{price}
+			, `updatedAt` = now()
+		WHERE
+			`id` = #{id}	
+	</update>
+	
+	
+	
+	
+	
+	<!-- DELETE 다루기 연습문제 -->
+	
+	<delete id="deleteRealEstateFied" parameterType="com.sheena.SpringTest.lesson03.model.RealEstateModel">
+		DELETE FROM `real_estate`
+		WHERE
+			`id` = #{id}
+	
+	</delete>
+
+
+</mapper>
