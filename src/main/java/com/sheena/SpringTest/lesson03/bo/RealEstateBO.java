@@ -70,7 +70,7 @@ public class RealEstateBO {
 	// UPDATE 다루기 연습문제
 	
 	public int updateRealEstateField(int id, String type, int price) {
-		return realEstateDAO.updateRealEstateField(id, type, price);
+		return realEstateDAO.updateRealEstate(id, type, price);
 	}
 	
 	

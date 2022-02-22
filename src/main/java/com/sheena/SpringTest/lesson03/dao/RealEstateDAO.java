@@ -58,7 +58,7 @@ public interface RealEstateDAO {
 	
 	// UPDATE 다루기 연습문제
 	
-	public int updateRealEstateField(
+	public int updateRealEstate(
 			@Param("id") int id,
 			@Param("type") String type,
 			@Param("price") int price);

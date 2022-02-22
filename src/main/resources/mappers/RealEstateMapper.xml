@@ -133,10 +133,9 @@
 	
 	
 	
-	<!-- UPDATE 다루기 연습문제 -->
+	<!-- UPDATE 다루기 연습문제 -->	
 	
-	
-	<update id="updateRealEstateField" parameterType="com.sheena.SpringTest.lesson03.model.RealEstateModel">
+	<update id="updateRealEstate" parameterType="map">
 		UPDATE `real_estate`
 		SET
 			`type` = #{type}
@@ -152,7 +151,7 @@
 	
 	<!-- DELETE 다루기 연습문제 -->
 	
-	<delete id="deleteRealEstateFied" parameterType="com.sheena.SpringTest.lesson03.model.RealEstateModel">
+	<delete id="deleteRealEstateFied" parameterType="int">
 		DELETE FROM `real_estate`
 		WHERE
 			`id` = #{id}

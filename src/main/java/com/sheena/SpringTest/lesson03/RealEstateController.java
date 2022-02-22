@@ -93,11 +93,12 @@ public class RealEstateController {
 	
 	
 	// UPDATE 다루기 연습문제
+	
 	@ResponseBody
 	@RequestMapping("/test03")
-	public String updateRealEstate(@RequestParam(value="id", defaultValue="23") int id) {
+	public String updateRealEstate() { // 전달 받을 것이 없어서 @RequestParam 필요 없음
 		
-		int count = realEstateBO.updateRealEstateField(id, "전세", 70000);
+		int count = realEstateBO.updateRealEstateField(23, "전세", 70000);
 		
 		return "수정 성공 : " + count;
 	}
