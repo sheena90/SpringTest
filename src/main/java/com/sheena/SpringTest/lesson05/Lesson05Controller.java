@@ -1,7 +1,9 @@
 package com.sheena.SpringTest.lesson05;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,13 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/lesson05")
 public class Lesson05Controller {
 
+	// JSTL Core 라이브러리1
+	
 	@GetMapping("/test01")
 	public String test01() {
 		return "lesson05/test01";
 	}
 	
 	
+	// JSTL Core 라이브러리2
 	
+	// 1. JSTL forEach
 	@GetMapping("/test02")
 	public String text02(Model model) {		
 
@@ -31,7 +37,95 @@ public class Lesson05Controller {
 		
 		model.addAttribute("music", musicRanking);
 		
+	
+	// 2. JSTL 응용하기
+		
+		List<Map<String, Object>> membership = new ArrayList<>();
+	
+		Map<String, Object> member = new HashMap<>();
+		member.put("name", "손오공");
+		member.put("phoneNumber", "010-1234-5678");
+		member.put("grade", "VIP");
+		member.put("point", 12040);
+		membership.add(member);
+	
+		member = new HashMap<>();
+		member.put("name", "저팔계");
+		member.put("phoneNumber", "010-4321-1234");
+		member.put("grade", "BASIC");
+		member.put("point", 3420);
+		membership.add(member);
+	
+		member = new HashMap<>();
+		member.put("name", "사오정");
+		member.put("phoneNumber", "010-8888-1111");
+		member.put("grade", "GOLD");
+		member.put("point", 1530);
+		membership.add(member);
+	
+		member = new HashMap<>();
+		member.put("name", "삼장");
+		member.put("phoneNumber", "010-0000-1234");
+		member.put("grade", "GOLD");
+		member.put("point", 8450);
+		membership.add(member);
+	
+		member = new HashMap<>();
+		member.put("name", "우마왕");
+		member.put("phoneNumber", "010-1111-2222");
+		member.put("grade", "BASIC");
+		member.put("point", 420);
+		membership.add(member);
+		
+		model.addAttribute("clubMember", membership);
+		
 		return "lesson05/test02";
 		
+	}
+	
+	
+	// JSTL fmt 라이브러리
+	
+	// 1. JSTL Formatter 숫자, 비율
+	
+	@GetMapping("/test03")
+	public String test03(Model model) {
+	
+		List<Integer> candidates = new ArrayList<>();
+		candidates.add(263001);
+		candidates.add(173942); 
+		candidates.add(563057);
+		
+		model.addAttribute("election", candidates);
+		
+		
+	// 2. JSTL Formatter 통화, 날짜
+		
+		List<Map<String, Object>> cardBills = new ArrayList<>();
+
+		Map<String, Object> cardBill = new HashMap<>();
+		cardBill.put("store", "GS48");
+		cardBill.put("pay", 7800);
+		cardBill.put("date", "2025-09-14");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "현태백화점");
+		cardBill.put("pay", 2750000);
+		cardBill.put("date", "2025-09-18");
+		cardBill.put("installment", "3개월");
+		cardBills.add(cardBill);
+
+		cardBill = new HashMap<>();
+		cardBill.put("store", "요촌치킨");
+		cardBill.put("pay", 180000);
+		cardBill.put("date", "2025-09-20");
+		cardBill.put("installment", "일시불");
+		cardBills.add(cardBill);
+		
+		model.addAttribute("card", cardBills);
+		
+		return "lesson05/test03";
 	}
 }

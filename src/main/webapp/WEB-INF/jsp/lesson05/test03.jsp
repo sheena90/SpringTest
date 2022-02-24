@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSTL Core 라이브러리2</title>
+<title>JSTL fmt 라이브러리</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -15,73 +16,50 @@
 </head>
 <body>
 	<div class="container">
-		<h1>HOT5</h1>
+		<h1>1. 후보자 득표율</h1>
 		<table class="table text-center">
 			<thead>
 				<tr>
-					<th>순위</th>
-					<th>제목</th>
-				</tr>
-			</thead>
-			
-			<tbody>		
-				<c:forEach var="musicName" items="${music }" varStatus="statu">
-					<tr>
-						<td>
-							${statu.count }
-						</td>
-						
-						<td>
-							${musicName }
-						</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-	
-		</table>
-		
-		
-		
-		<h1>멤버십</h1>
-		<table class="table text-center">
-			<thead>			
-				<tr>
-					<th>이름</th>
-					<th>전화번호</th>
-					<th>등급</th>
-					<th>포인트</th>
+					<th>기호</th>
+					<th>득표 수</th>
+					<th>득표 율</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="item" items="${clubMember }">
+			<c:forEach var="item" items="${election }" varStatus="statu">
 				<tr>
-					<td>${item.name }</td>
-					<td>${item.phoneNumber }</td>
-					<c:choose>
-						<c:when test="${item.grade == 'VIP'}">
-							<td class="text-danger">${item.grade }</td>
-						</c:when>
-						<c:when test="${item.grade == 'GOLD'}">
-							<td class="text-warning">${item.grade }</td>
-						</c:when>
-						<c:otherwise>
-							<td>${item.grade }</td>
-						</c:otherwise>
-					</c:choose>
-					<c:choose>
-						<c:when test="${item.point >= 5000 }">
-							<td class="text-primary">${item.point }p</td>
-						</c:when>
-						<c:otherwise>
-							<td>${item.point }p</td>
-						</c:otherwise>
-					</c:choose>
+					<td>${statu.count }</td>
+					<td>${item }</td>
+					<td><fmt:formatNumber value="${item / 1000000 }" type="percent"/></td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		
+		
+		<h1>2. 카드 명세서</h1>
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>사용처</th>
+					<th>가격</th>
+					<th>사용 날짜</th>
+					<th>할부</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="item" items="${card }" varStatus="statu">
+				<tr>
+					<td>${item.store }</td>
+					<td><fmt:formatNumber value="${item.pay }" type="currency" /></td>
+					<fmt:parseDate value="${item.date }" pattern="yyyy-MM-dd" var="date" />
+					<td><fmt:formatDate value="${date }" pattern="yyyy년 M월 d일"/></td>
+					<td>${item.installment }</td>
 				</tr>
 			</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
 
 </body>
-</html>
+</html>	
