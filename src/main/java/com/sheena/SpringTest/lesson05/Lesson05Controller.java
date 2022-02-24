@@ -6,11 +6,20 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class JSTL02Controller {
+@RequestMapping("/lesson05")
+public class Lesson05Controller {
+
+	@GetMapping("/test01")
+	public String test01() {
+		return "lesson05/test01";
+	}
 	
-	@GetMapping("/lesson05/test02")
+	
+	
+	@GetMapping("/test02")
 	public String text02(Model model) {		
 
 		List<String> musicRanking = new ArrayList<>();
@@ -25,6 +34,4 @@ public class JSTL02Controller {
 		return "lesson05/test02";
 		
 	}
-	
-
 }
