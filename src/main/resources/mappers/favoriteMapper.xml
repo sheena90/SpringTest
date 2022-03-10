@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sheena.SpringTest.lesson06.dao.FavoriteDAO">
+	<insert id="insertFavorite" parameterType='map'>
+		INSERT INTO `web_site`
+		(
+			`name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		) VALUE (
+			#{name}
+			, #{url}
+			, now()
+			, now()
+		)
+	</insert>
+	
+	<select id="selectFavoriteList" resultType="com.sheena.SpringTest.lesson06.model.FavoriteModel">
+		SELECT
+			`id`
+			, `name`
+			, `url`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`web_site`
+		
+	</select>
+	
+	
+	<!-- 중복 체크 -->
+	<select id="selectUrlCount" parameterType="string" resultType="int">
+		SELECT
+			count(*)
+		FROM
+			`web_site`
+		WHERE
+			`url` = #{url}
+	
+	</select>
+	
+	
+	<!-- 삭제 -->
+	<delete id="deleteFavorite" parameterType="int">
+		DELETE FROM
+			`web_site`
+		WHERE
+			`id` = #{id}
+	</delete>
+</mapper>

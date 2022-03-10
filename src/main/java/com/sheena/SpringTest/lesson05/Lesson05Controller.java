@@ -10,23 +10,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sheena.SpringTest.lesson05.model.Member;
+
 @Controller
 @RequestMapping("/lesson05")
 public class Lesson05Controller {
 
 	// JSTL Core 라이브러리1
-	
+
 	@GetMapping("/test01")
 	public String test01() {
 		return "lesson05/test01";
 	}
-	
-	
+
 	// JSTL Core 라이브러리2
-	
+
 	// 1. JSTL forEach
 	@GetMapping("/test02")
-	public String text02(Model model) {		
+	public String text02(Model model) {
 
 		List<String> musicRanking = new ArrayList<>();
 		musicRanking.add("강남스타일");
@@ -34,73 +35,70 @@ public class Lesson05Controller {
 		musicRanking.add("좋은날");
 		musicRanking.add("거짓말");
 		musicRanking.add("보고싶다");
-		
+
 		model.addAttribute("music", musicRanking);
-		
-	
-	// 2. JSTL 응용하기
-		
+
+		// 2. JSTL 응용하기
+
 		List<Map<String, Object>> membership = new ArrayList<>();
-	
+
 		Map<String, Object> member = new HashMap<>();
 		member.put("name", "손오공");
 		member.put("phoneNumber", "010-1234-5678");
 		member.put("grade", "VIP");
 		member.put("point", 12040);
 		membership.add(member);
-	
+
 		member = new HashMap<>();
 		member.put("name", "저팔계");
 		member.put("phoneNumber", "010-4321-1234");
 		member.put("grade", "BASIC");
 		member.put("point", 3420);
 		membership.add(member);
-	
+
 		member = new HashMap<>();
 		member.put("name", "사오정");
 		member.put("phoneNumber", "010-8888-1111");
 		member.put("grade", "GOLD");
 		member.put("point", 1530);
 		membership.add(member);
-	
+
 		member = new HashMap<>();
 		member.put("name", "삼장");
 		member.put("phoneNumber", "010-0000-1234");
 		member.put("grade", "GOLD");
 		member.put("point", 8450);
 		membership.add(member);
-	
+
 		member = new HashMap<>();
 		member.put("name", "우마왕");
 		member.put("phoneNumber", "010-1111-2222");
 		member.put("grade", "BASIC");
 		member.put("point", 420);
 		membership.add(member);
-		
+
 		model.addAttribute("clubMember", membership);
-		
+
 		return "lesson05/test02";
-		
+
 	}
-	
-	
+
 	// JSTL fmt 라이브러리
-	
+
 	// 1. JSTL Formatter 숫자, 비율
-	
+
 	@GetMapping("/test03")
 	public String test03(Model model) {
-	
+
 		List<Integer> candidates = new ArrayList<>();
 		candidates.add(263001);
-		candidates.add(173942); 
+		candidates.add(173942);
 		candidates.add(563057);
-		
+
 		model.addAttribute("election", candidates);
-		
-		
-	// 2. JSTL Formatter 통화, 날짜
-		
+
+		// 2. JSTL Formatter 통화, 날짜
+
 		List<Map<String, Object>> cardBills = new ArrayList<>();
 
 		Map<String, Object> cardBill = new HashMap<>();
@@ -123,9 +121,70 @@ public class Lesson05Controller {
 		cardBill.put("date", "2025-09-20");
 		cardBill.put("installment", "일시불");
 		cardBills.add(cardBill);
-		
+
 		model.addAttribute("card", cardBills);
-		
+
 		return "lesson05/test03";
 	}
+
+	// JSTL fn 라이브러리
+	@GetMapping("/test04")
+	public String test04(Model model) {
+
+		List<Member> members = new ArrayList<>();
+
+		Member member = new Member();
+		member.setName("유비");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("youbee@gmail.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("저는 촉의 군주 유비입니다. 삼국통일을 위해 열심히 일하겠습니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("관우");
+		member.setPhoneNumber("010-1234-5678");
+		member.setEmail("woo@naver.com");
+		member.setNationality("삼국시대 촉한");
+		member.setIntroduce("관우에요. 저는 유비형님 보다 나이는 많지만 일단 아우입니다.");
+		members.add(member);
+
+		member = new Member();
+		member.setName("장비");
+		member.setPhoneNumber("02-111-3333");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("tools@gmail.com");
+		member.setIntroduce("장비라우");
+		members.add(member);
+
+		member = new Member();
+		member.setName("조조");
+		member.setPhoneNumber("010-0987-4321");
+		member.setNationality("삼국시대 위");
+		member.setEmail("jojo@gmail.com");
+		member.setIntroduce("이름은 조조 자는 맹덕이라 하오");
+		members.add(member);
+
+		member = new Member();
+		member.setName("주유");
+		member.setPhoneNumber("010-0000-1111");
+		member.setNationality("삼국시대 오");
+		member.setEmail("jooyou@kakao.com");
+		member.setIntroduce("주유는 주유소에서 ㅋㅋ");
+		members.add(member);
+
+		member = new Member();
+		member.setName("황충");
+		member.setPhoneNumber("031-432-0000");
+		member.setNationality("삼국시대 촉한");
+		member.setEmail("yellowbug@naver.com");
+		member.setIntroduce("내 수염 좀 멋있는 듯");
+		members.add(member);
+		
+		model.addAttribute("members", members);
+
+		return "lesson05/test04";
+
+	}
+
 }
