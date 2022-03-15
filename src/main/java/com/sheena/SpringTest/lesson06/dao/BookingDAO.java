@@ -25,7 +25,8 @@ public interface BookingDAO {
 			@Param("date") String date,
 			@Param("day") int day,
 			@Param("headcount") int headcount,
-			@Param("phoneNumber") String phoneNumber);
+			@Param("phoneNumber") String phoneNumber,
+			@Param("state") String state);
 	
 	
 	// 예약 조회
@@ -34,4 +35,7 @@ public interface BookingDAO {
 			@Param("phoneNumber") String phoneNumber);
 	
 	
+	
+	// 예약목록 페이지 예약상태 바꾸기
+	public int updateState(@Param("id") int id);
 }

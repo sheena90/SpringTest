@@ -30,7 +30,7 @@ public class BookingBO {
 	
 	// 입력
 	public int addBooking(String name, String date, int day, int headcount, String phoneNumber) {
-		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber);
+		return bookingDAO.insertBooking(name, date, day, headcount, phoneNumber, "대기중");
 	}
 	
 	
@@ -39,5 +39,10 @@ public class BookingBO {
 		return bookingDAO.selectBooking(name, phoneNumber);
 	}
 	
+	
+	// 예약목록 페이지 예약상태 바꾸기
+	public int stateChange(int id) {
+		return bookingDAO.updateState(id);
+	}
 	
 }

@@ -93,15 +93,27 @@
 					return;
 				}
 				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/booking",
+					data:{"name":name, "phoneNumber":phoneNumber},
+					success:function(data) {
+						if(data == "") {
+							alert("예약 내역이 없습니다.");
+						} else {
+							
+							alert("이름 : " + data.name + "\n"
+									+ "날짜 : " + data.date.slice(0,10) + "\n"
+									+ "일수 : " + data.day + "\n"
+									+ "인원 : " + data.headcount + "\n"
+									+ "상태 : " + data.state);
+						}
+					},
+					error:function() {
+						alert("조회 에러");
+					}
+				});
 				
-				
-				/*
-				alert("이름 : " + name + "\n"
-				+ "날짜 : " + date + "\n"
-				+ "일수 : " + day + "\n"
-				+ "인원 : " + headcount + "\n"
-				+ "상태 : " + )
-				*/
 			});
 		});
 	</script>

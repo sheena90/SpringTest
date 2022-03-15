@@ -60,10 +60,15 @@
 									<span class="text-success">${item.state }</span>
 								</c:when>
 								<c:when test="${item.state == '대기중' }">
-									<span class="text-info">${item.state }</span>
+									<span class="text-info">
+										<a href="#" class="changeBtn" data-booking-id="${item.id }">${item.state }</a>
+									</span>
+								</c:when>
+								<c:when test="${item.state == '취소' }">
+									<span class="text-danger">${item.state }</span>
 								</c:when>
 								<c:otherwise>
-									<span class="text-danger">${item.state }</span>
+									<span>${item.state }</span>
 								</c:otherwise>
 							</c:choose>
 						</td>
@@ -84,6 +89,7 @@
 	
 	<script>
 		$(document).ready(function(){
+			// 삭제
 			$(".deleteBtn").on("click", function(){
 				
 				let bookingID = $(this).data("booking-id");
@@ -101,6 +107,29 @@
 					},
 					error:function(){
 						alert("삭제 에러");
+					}
+				});
+			});
+			
+			
+			// 예약목록 페이지 예약상태 바꾸기
+			$(".changeBtn").on("click", function(){
+				
+				let bookingID = $(this).data("booking-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/lesson06/state_change",
+					data:{"id":bookingID},
+					success:function(data) {
+						if(data.result == "success") {
+							  location.reload();
+						} else {
+							alert("상태 변경 실패");
+						}
+					},
+					error:function(){
+						alert("상태 변경 에러");
 					}
 				});
 			});

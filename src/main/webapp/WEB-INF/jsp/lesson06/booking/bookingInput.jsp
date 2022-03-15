@@ -79,6 +79,7 @@
                 changeMonth: true,  // 월 셀렉트 박스 
                 changeYear: true,   // 년 셀렉트 박스 
                 dateFormat:"yy-mm-dd",  // 표시 포멧 
+                minDate:0
             });
 			
 			$("#addBtn").on("click", function(){
@@ -102,10 +103,24 @@
 					alert("숙박일수를 입력하세요.")
 					return;
 				}
+				
+				// 숙박일수를 숫자가 아닌 것을 입력한 경우
+				if(isNaN(day)) {
+					alert("숙박일수는 숫자만 입력 가능합니다.");
+					return;
+				}
+				
 				if(headcount == "") {
 					alert("숙박인원을 입력하세요.")
 					return;
 				}
+				
+				// 숙박인원을 숫자가 아닌 것을 입력한 경우
+				if(isNaN(headcount)) {
+					alert("숙박인원은 숫자만 입력 가능합니다.");
+					return;
+				}
+				
 				if(phoneNumber == "") {
 					alert("전화번호를 입력하세요.")
 					return;

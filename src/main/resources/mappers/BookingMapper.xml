@@ -38,6 +38,7 @@
 			, `day`
 			, `headcount`
 			, `phoneNumber`
+			, `state`
 			, `createdAt`
 			, `updatedAt`
 		) VALUE (
@@ -46,6 +47,7 @@
 			, #{day}
 			, #{headcount}
 			, #{phoneNumber}
+			, #{state}
 			, now()
 			, now()
 		)
@@ -74,5 +76,15 @@
 			AND `phoneNumber` = #{phoneNumber}
 			]]>
 	</select>
+	
+	<!-- 예약목록 페이지 예약상태 바꾸기 -->
+	<update id="updateState" parameterType="int">
+		UPDATE `booking`
+		SET
+			`state` = '확정'
+		WHERE
+			`id` = #{id}
+	
+	</update>
 
 </mapper>

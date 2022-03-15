@@ -86,23 +86,39 @@ public class bookingController {
 	
 	// 예약 조회
 	@GetMapping("/booking_select")	
-	public String bookingSelect(
-			@RequestParam(value="name", required=false) String name,
-			@RequestParam(value="phoneNumber", required=false) String phoneNumber,
-			Model model) {
-		
-		if(name != null || phoneNumber != null) {
-			
-			BookingModel bookingSelect = bookingBO.getBooking(name, phoneNumber);
-			model.addAttribute("booking", bookingSelect);
-			
-		} else {
-			
-			
-		}
-		
+	public String bookingMain() {
 		return "lesson06/booking/bookingMain";
 	}
 	
+	@GetMapping("/booking")
+	@ResponseBody
+	public BookingModel getBooking(
+			@RequestParam("name") String name,
+			@RequestParam("phoneNumber") String phoneNumber) {
+		
+		BookingModel booking = bookingBO.getBooking(name, phoneNumber);
+		
+		// {"name":"장나라", "phoneNumber":"010-222-0000", "date":"", "day":}
+		
+		return booking;
+	}
 	
+	
+	// 예약목록 페이지 예약상태 바꾸기
+	@GetMapping("/state_change")
+	@ResponseBody
+	public Map<String, String> changeState(@RequestParam("id") int id) {
+		
+		int count = bookingBO.stateChange(id);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
 }
